@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 
 # Create your views here.
@@ -9,9 +9,15 @@ def home(request):
 
 def new(request):
     if request.method == 'POST':
-        Post.objects.create(
-            title = request.POST['title'], 
+        new_post = Post.objects.create(
+            title = request.POST['title'],
             content = request.POST['content']
         )
-        
+        return redirect('detail', new_post.pk)
+
     return render(request, 'new.html')
+
+def detail(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+
+    return render(request, 'detail.html', {'post': post})

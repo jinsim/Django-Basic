@@ -7,15 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>독후감 블로그</h1>
     <div>
         <ul>
             {% for post in posts %}
-            <li>{{ post.title }}</li>
+            <li>
+                <a href="{% url 'detail' post.pk %}">{{ post.title }}</a>
+            </li>
             {% endfor %}
         </ul>
     </div>
     <a href="{% url 'new' %}">글 쓰러가기</a>
 </body>
+
 </html>
