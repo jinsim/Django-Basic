@@ -21,7 +21,7 @@ def detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
 
     return render(request, 'detail.html', {'post': post})
-    
+
 def edit(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     
@@ -33,3 +33,9 @@ def edit(request, post_pk):
         return redirect('detail', post_pk)
 
     return render(request, 'edit.html', {'post': post})
+
+def delete(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    post.delete()
+
+    return redirect('home')
